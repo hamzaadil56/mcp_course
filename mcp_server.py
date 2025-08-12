@@ -1,6 +1,18 @@
+"""
+FastMCP quickstart example.
+
+cd to the `examples/snippets/clients` directory and run:
+    uv run server fastmcp_quickstart stdio
+"""
+
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP(name="mcp-course", stateless_http=True)
+# Create an MCP server
+mcp = FastMCP("Demo")
 
 
-mcp_app = mcp.streamable_http_app()
+# Add an addition tool
+@mcp.tool()
+def add(a: int, b: int) -> int:
+    """Add two numbers"""
+    return a + b
