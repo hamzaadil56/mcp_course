@@ -28,3 +28,19 @@ def get_settings() -> str:
   "language": "en",
   "debug": false
 }"""
+
+
+# Add a resource to read the README file
+@mcp.resource("file://README.md")
+def get_readme() -> str:
+    """Read the README.md file from the repository."""
+    import os
+    try:
+        readme_path = os.path.join(os.path.dirname(__file__), "README.md")
+        with open(readme_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        return content if content.strip() else "README.md file is empty"
+    except FileNotFoundError:
+        return "README.md file not found in the repository"
+    except Exception as e:
+        return f"Error reading README.md: {str(e)}"
