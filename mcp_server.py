@@ -16,3 +16,15 @@ mcp = FastMCP("Demo")
 def add(a: int, b: int) -> int:
     """Add two numbers"""
     return a + b
+
+# Add a dynamic greeting resource
+
+
+@mcp.resource("config://settings")
+def get_settings() -> str:
+    """Get application settings."""
+    return """{
+  "theme": "dark",
+  "language": "en",
+  "debug": false
+}"""
